@@ -1,0 +1,6 @@
+config.js
+package-lock.json
+*.env*
+/node_modules
+/public*
+/bower_components/
