@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
 const pageScraper = require('./lib/page-scraper');
+const getGoodReadBooks = require('./lib/good-reads-api');
 
 app.engine('html', exphbs({
     defaultLayout: 'main',
@@ -37,7 +38,7 @@ const getBooks = (json) => {
 
     
 app.get('/', (req, res) => {
-    pageScraper();
+    getGoodReadBooks(res);
 });
 
 // console.log(getBooks(json))
