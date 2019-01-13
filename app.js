@@ -20,28 +20,16 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //******** PATHS ********//
-
-const getBooks = (json) => {
-    // const booksParent = json.GoodreadsResponse.user.updates.update
-    // return booksParent.map(book => {
-    //     if (book.object.read_stats.status === 'to-read')
-    //     return {
-    //         title: book.book.title._text,
-    //         author: book.shelf_display_name._text,
-    //         isbn: book.isbn,
-    //         isbn13: book.isbn13
-    //     }
-    // })
-}
-
-    pageScraper();
-
     
-app.get('/', (req, res) => {
-    getGoodReadBooks(res);
+app.get('/', async (req, res) => {
+    try {
+        const toReadList = await getGoodReadBooks();
+        const result = JSON.stringify(toReadList);
+        res.render('page', {result});
+    } catch(err) {
+        console.log(err);
+    }
 });
-
-// console.log(getBooks(json))
 
 app.listen(process.env.PORT || 8001, () => {
     console.log('book-list: listening');
