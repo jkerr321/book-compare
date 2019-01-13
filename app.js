@@ -4,8 +4,7 @@ const app = express();
 const exphbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
-const pageScraper = require('./lib/page-scraper');
-const getGoodReadBooks = require('./lib/good-reads-api');
+const renderPriceCompare = require('./server/controllers/price-compare-controller');
 
 app.engine('html', exphbs({
     defaultLayout: 'main',
@@ -21,15 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //******** PATHS ********//
     
-app.get('/', async (req, res) => {
-    try {
-        const toReadList = await getGoodReadBooks();
-        const result = JSON.stringify(toReadList);
-        res.render('page', {result});
-    } catch(err) {
-        console.log(err);
-    }
-});
+app.get('/', renderPriceCompare);
 
 app.listen(process.env.PORT || 8001, () => {
     console.log('book-list: listening');

@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const convert = require('xml-js');
-const { GOODREADS_KEY, GOODREADS_USER } = require('../config')
+const { GOODREADS_KEY, GOODREADS_USER } = require('../../config')
 
 // amazon URL = https://www.amazon.co.uk/gp/product/[ISBN or ASIN]/
 

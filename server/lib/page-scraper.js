@@ -1,30 +1,13 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-const url = 'https://www.amazon.co.uk/gp/product/1781258635/ref=x_gr_w_bb?ie=UTF8&tag=x_gr_w_bb_uk-21&linkCode=as2&camp=1634&creative=6738';
 
 const pageScraper = async () => {
     try {
+        const url = 'https://www.amazon.co.uk/gp/product/1781258635/ref=x_gr_w_bb?ie=UTF8&tag=x_gr_w_bb_uk-21&linkCode=as2&camp=1634&creative=6738';
         const html = await rp(url);
         const $ = cheerio.load(html);
 
-        let bookFormatsModel = {
-            kindle: {
-                amazon: '',
-                new_from: '',
-                used_from: ''
-            },
-            hardcover: {
-                amazon: '',
-                new_from: '',
-                used_from: ''
-            },
-            paperback: {
-                amazon: '',
-                new_from: '',
-                used_from: ''
-            }
-        };
-
+        // isolate section of html containing prices and use regex to extract them
         const str = $('#twister > .top-level').each((i, el)=>{
             const strWithWhitespace = $(el).text(); //?? why console.log($(this).text()) not work? nothing is logged
             const cleanString = strWithWhitespace.replace(/\s+/g, ' ').trim()
@@ -44,6 +27,8 @@ const pageScraper = async () => {
             })
 
         });
+
+        return bookFormatsModel;
 
     } catch (err) {
         console.log(err);
