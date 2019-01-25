@@ -5,13 +5,18 @@ const BookModel = require('../models/book-model');
 const renderPriceCompareTable = async (req, res) => {
     try {
         const bookModel = new BookModel;
-        const toReadList = await getGoodReadBooks();
+        // const toReadList = await getGoodReadBooks();
+        const scraped = await pageScraper(bookModel.prices);
+        console.log('==================');
+        console.log('scraped', scraped);
+        console.log('==================');
+
         // for each to read get price info and add to book object
 
 
 
-        const result = JSON.stringify(toReadList);
-        res.render('page', { result });
+        // const result = JSON.stringify(toReadList);
+        // res.render('page', { result });
     } catch (err) {
         console.log(err);
     }
