@@ -25,6 +25,20 @@ class BookModel {
             }
         }
     }
+
+    addBookInfo(details) {
+        this.model.title = details.title;
+        this.model.author = details.author;
+        this.model.average_rating = details.average_rating;
+        this.model.isbn = details.isbn;
+        this.model.isbn13 = details.isbn13;
+    }
+
+    addPriceInfo(prices) {
+        this.model.prices.kindle = prices.kindle;
+        this.model.prices.hardcover = prices.hardcover;
+        this.model.prices.paperback = prices.paperback;
+    }
 }
 
 module.exports = BookModel;

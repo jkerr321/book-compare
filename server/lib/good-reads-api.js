@@ -27,7 +27,7 @@ const getBookInfo = async () => {
             const book = bookInfo.book;
             return  {
                 title: book.title._text,
-                author: book.authors.author.name_text,
+                author: book.authors.author.name._text,
                 average_rating: book.average_rating._text,
                 isbn: book.isbn._text || null,
                 isbn13: book.isbn13._text || null
