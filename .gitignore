@@ -1,4 +1,4 @@
-config.js
+config.json
 package-lock.json
 *.env*
 /node_modules

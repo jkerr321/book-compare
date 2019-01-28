@@ -2,10 +2,11 @@ const rp = require('request-promise');
 const cheerio = require('cheerio');
 const testData = require('../test/fixtures/testData');
 
-const pageScraper = async (bookModel, testMode) => {    
+const pageScraper = async ({isbn, bookModel, testMode}) => {
     try {
         //scrape prices from amazon (or testData if in test mode)
         const options = {
+            //TODO use isbn here
             uri: 'https://www.amazon.co.uk/gp/product/1781258635/ref=x_gr_w_bb?ie=UTF8&tag=x_gr_w_bb_uk-21&linkCode=as2&camp=1634&creative=6738',
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
