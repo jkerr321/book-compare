@@ -1,5 +1,4 @@
-module.exports = 
-[
+module.exports = [
     {
         title: "Natives: Race and Class in the Ruins of Empire",
         author: "Akala",
@@ -8,19 +7,19 @@ module.exports =
         isbn13: "9781473661219",
         prices: {
             kindle: {
-                amazon: "",
-                new_from: "",
-                used_from: ""
+                amazon: 1000,
+                new_from: 1000,
+                used_from: 1000
             },
             hardcover: {
-                amazon: "",
-                new_from: "",
-                used_from: ""
+                amazon: 1000,
+                new_from: 1000,
+                used_from: 1000
             },
             paperback: {
-                amazon: "",
-                new_from: "",
-                used_from: ""
+                amazon: 1000,
+                new_from: 1000,
+                used_from: 1000
             }
         }
     },
@@ -32,19 +31,19 @@ module.exports =
         isbn13: "9780671727796",
         prices: {
             kindle: {
-                amazon: "5.99",
-                new_from: "—",
-                used_from: "—"
+                amazon: 5.99,
+                new_from: 1000,
+                used_from: 1000
             },
             hardcover: {
-                amazon: "",
-                new_from: "",
-                used_from: ""
+                amazon: 1000,
+                new_from: 1000,
+                used_from: 1000
             },
             paperback: {
-                amazon: "5.99",
-                new_from: "3.95",
-                used_from: "4.59"
+                amazon: 5.99,
+                new_from: 3.95,
+                used_from: 4.59
             }
         }
     },
@@ -56,19 +55,19 @@ module.exports =
         isbn13: "9781473667723",
         prices: {
             kindle: {
-                amazon: "3.99",
-                new_from: "—",
-                used_from: "—"
+                amazon: 3.99,
+                new_from: 1000,
+                used_from: 1000
             },
             hardcover: {
-                amazon: "9.35",
-                new_from: "7.91",
-                used_from: "5.12"
+                amazon: 9.35,
+                new_from: 7.91,
+                used_from: 5.12
             },
             paperback: {
-                amazon: "7.03",
-                new_from: "7.03",
-                used_from: "—"
+                amazon: 7.03,
+                new_from: 7.03,
+                used_from: 1000
             }
         }
     },
@@ -80,20 +79,20 @@ module.exports =
         isbn13: "9781844080410",
         prices: {
             kindle: {
-                amazon: "5.99",
-                new_from: "—",
-                used_from: "—"
+                amazon: 5.99,
+                new_from: 1000,
+                used_from: 1000
             },
             hardcover: {
-                amazon: "14.99",
-                new_from: "9.33",
-                used_from: "5.85"
+                amazon: 14.99,
+                new_from: 9.33,
+                used_from: 5.85
             },
             paperback: {
-                amazon: "6.99",
-                new_from: "4.99",
-                used_from: "0.01"
+                amazon: 6.99,
+                new_from: 4.99,
+                used_from: 0.01
             }
         }
     }
-]
+];

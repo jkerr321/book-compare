@@ -1,1 +1,31 @@
-{{result}}
+<main>
+    <table>
+        <thead>
+            <tr>
+                <th class="text" data-type="text" scope="col" role="columnheader">Book Title</th>
+                <th class="text" data-type="text" scope="col" role="columnheader">Author</th>
+                <th data-type="number" scope="col" role="columnheader">GoodReads<span>Rating</span></th>
+                <th data-type="number" scope="col" role="columnheader">Kindle</th>
+                <th data-type="number" scope="col" role="columnheader">Hardcover<span>Amazon</span></th>
+                <th data-type="number" scope="col" role="columnheader">Hardcover<span>Used</span></th>
+                <th data-type="number" scope="col" role="columnheader">Paperback<span>Amazon</span></th>
+                <th data-type="number" scope="col" role="columnheader">Paperback<span>Used</span></th>
+            </tr>
+        </thead>
+        <tbody id="tableData">
+            {{#each books}}
+            <tr>
+                <td class="text">{{this.title}}</td>
+                <td class="text">{{this.author}}</td>
+                <td>{{this.average_rating}}</td>
+                <td>{{this.prices.kindle.amazon}}</td>
+                <td>{{this.prices.hardcover.amazon}}</td>
+                <td>{{this.prices.hardcover.used_from}}</td>
+                <td>{{this.prices.paperback.amazon}}</td>
+                <td>{{this.prices.paperback.used_from}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</main>
+

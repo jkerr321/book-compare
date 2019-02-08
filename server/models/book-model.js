@@ -9,8 +9,6 @@ class BookModel {
             prices: {
                 kindle: {
                     amazon: '',
-                    new_from: '',
-                    used_from: ''
                 },
                 hardcover: {
                     amazon: '',
