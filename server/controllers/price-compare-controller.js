@@ -16,16 +16,35 @@ const renderPriceCompareTable = async (req, res) => {
 			return bookModel;
 		});
 
-		// const books = await scrapePrices(bookModelArray);
-		// console.log('==================');
-		// console.dir(books, { depth: 10 });
-		// console.log('==================');
+		const pricesArray = await scrapePrices(bookModelArray);
 
+		//!!is this confused? - passing bookModel in still causes side effects!
+		const bookObjectsForRender = bookModelArray.map(book => {
+			pricesArray.forEach(amazonPriceObject => {
+				if (book.model.title === amazonPriceObject.title) {
+					book.model.prices = amazonPriceObject.prices;
+				}
+			});
+			return book;
+		});
+
+		console.log('==================');
+		console.dir(bookObjectsForRender, { depth: 10 });
+		console.log('==================');
 		const books = testModel;
-		res.render('page', { books });
+		res.render('page', {
+			books
+		});
 	} catch (err) {
 		console.log(err);
 	}
 };
 
 module.exports = renderPriceCompareTable;
+
+/*
+get subset of next 5 from goodReadsList
+scrape prices for them
+update subset to += 5
+go again
+*/
