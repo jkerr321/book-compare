@@ -2,6 +2,5 @@ config.json
 package-lock.json
 *.env*
 /node_modules
-/public*
 /bower_components/
-/server/test/fixtures/testData.js
+/public*
