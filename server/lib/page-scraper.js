@@ -59,29 +59,25 @@ const pageScraper = async bookModelArray => {
 				? bookModel.model.isbn
 				: bookModel.model.isbn13;
 
-			try {
-				if (isbn) {
-					// get Amazon Standard Identification Number - the book’s ISBN in its older, 10-digit version
-					const aisn = isbn.substring(isbn.length - 10);
+			if (isbn) {
+				// get Amazon Standard Identification Number - the book’s ISBN in its older, 10-digit version
+				const aisn = isbn.substring(isbn.length - 10);
 
-					const scrapedDataArray = await getData(aisn, browser);
-					const amazonPrices = await formatData(scrapedDataArray);
+				const scrapedDataArray = await getData(aisn, browser);
+				const amazonPrices = await formatData(scrapedDataArray);
 
-					console.info(
-						`scraped and formatted prices for ${
-							bookModel.model.title
-						}: ${index} of ${bookModelArray.length}`
-					);
+				console.info(
+					`scraped and formatted prices for ${
+						bookModel.model.title
+					}: ${index} of ${bookModelArray.length}`
+				);
 
-					return {
-						title: bookModel.model.title,
-						prices: amazonPrices
-					};
-				} else {
-					console.log(`no isbn for ${bookModel.model.title}`); //TODO handle this better
-				}
-			} catch (error) {
-				console.log('error', error);
+				return {
+					title: bookModel.model.title,
+					prices: amazonPrices
+				};
+			} else {
+				console.log(`no isbn for ${bookModel.model.title}`); //TODO handle this better
 			}
 		})
 	);
