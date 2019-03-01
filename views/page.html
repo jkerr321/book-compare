@@ -1,31 +1,44 @@
 <main>
-    <table>
-        <thead>
-            <tr>
-                <th data-type="text" scope="col" role="columnheader">Book Title</th>
-                <th data-type="text" scope="col" role="columnheader">Author</th>
-                <th data-type="number" scope="col" role="columnheader">GoodReads Rating</th>
-                <th data-type="number" scope="col" role="columnheader">Kindle</th>
-                <th data-type="number" scope="col" role="columnheader">Hardcover Amazon</th>
-                <th data-type="number" scope="col" role="columnheader">Hardcover Used</th>
-                <th data-type="number" scope="col" role="columnheader">Paperback Amazon</th>
-                <th data-type="number" scope="col" role="columnheader">Paperback Used</th>
-            </tr>
-        </thead>
-        <tbody id="tableData">
-            {{#each books}}
-            <tr>
-                <td class="text">{{this.title}}</td>
-                <td class="text">{{this.author}}</td>
-                <td>{{this.average_rating}}</td>
-                <td>{{this.prices.kindle.amazon}}</td>
-                <td>{{this.prices.hardcover.amazon}}</td>
-                <td>{{this.prices.hardcover.used_from}}</td>
-                <td>{{this.prices.paperback.amazon}}</td>
-                <td>{{this.prices.paperback.used_from}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+	<table>
+		<thead>
+			<tr>
+				<th data-type="text" scope="col" role="columnheader">
+					Book Title
+				</th>
+				<th data-type="text" scope="col" role="columnheader">Author</th>
+				<th data-type="number" scope="col" role="columnheader">
+					GoodReads Rating
+				</th>
+				<th data-type="number" scope="col" role="columnheader">
+					Kindle
+				</th>
+				<th data-type="number" scope="col" role="columnheader">
+					Hardcover Amazon
+				</th>
+				<th data-type="number" scope="col" role="columnheader">
+					Hardcover Used
+				</th>
+				<th data-type="number" scope="col" role="columnheader">
+					Paperback Amazon
+				</th>
+				<th data-type="number" scope="col" role="columnheader">
+					Paperback Used
+				</th>
+			</tr>
+		</thead>
+		<tbody id="tableData">
+			{{#each books}}
+			<tr>
+				<td class="text">{{ this.title }}</td>
+				<td class="text">{{ this.author }}</td>
+				<td>{{ this.average_rating }}</td>
+				<td>{{ this.prices.kindle.amazon }}</td>
+				<td>{{ this.prices.hardcover.amazon }}</td>
+				<td>{{ this.prices.hardcover.used_from }}</td>
+				<td>{{ this.prices.paperback.amazon }}</td>
+				<td>{{ this.prices.paperback.used_from }}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </main>
-
