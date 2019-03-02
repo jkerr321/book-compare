@@ -1,5 +1,7 @@
 const scrapePrices = require('../lib/page-scraper');
 const getGoodReadBooks = require('../lib/good-reads-api');
+
+// test data sets
 const goodReadsTestResponse = require('../test/fixtures/good-reads-api-output');
 const testBookObjectsForRender = require('../test/fixtures/bookObjectsForRender');
 

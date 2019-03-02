@@ -76,7 +76,7 @@ const pageScraper = async bookInfoArray => {
 					prices: amazonPrices
 				};
 			} else {
-				console.log(`no isbn for ${bookInfo.title}`);
+				console.info(`no isbn for ${bookInfo.title}`);
 			}
 		})
 	);
