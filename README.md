@@ -1,8 +1,8 @@
 ### TODO
 
--   Make test mode conditional
--   Put test mode back in??
--   Responsive?
+Server side
+
+-   If Timeout error still return those results that have been successful
 
 Table sorting
 

@@ -1,8 +1,9 @@
 const scrapePrices = require('../lib/page-scraper');
 const getGoodReadBooks = require('../lib/good-reads-api');
-const BookModel = require('../models/book-model');
+
+// test data sets
 const goodReadsTestResponse = require('../test/fixtures/good-reads-api-output');
-const testModel = require('../test/fixtures/complete-book-model-view');
+const testBookObjectsForRender = require('../test/fixtures/bookObjectsForRender');
 
 const renderPriceCompareTable = async (req, res) => {
 	try {
@@ -10,28 +11,32 @@ const renderPriceCompareTable = async (req, res) => {
 		const toReadList = goodReadsTestResponse;
 
 		// for each toRead get price info and add to book object
-		const bookModelArray = toReadList.map(bookInfo => {
-			const bookModel = new BookModel();
-			bookModel.addBookInfo(bookInfo);
-			return bookModel;
+		const bookInfoArray = toReadList.map(bookInfo => {
+			return {
+				title: bookInfo.title,
+				author: bookInfo.author,
+				average_rating: bookInfo.average_rating,
+				isbn: bookInfo.isbn,
+				isbn13: bookInfo.isbn13
+			};
 		});
 
-		const pricesArray = await scrapePrices(bookModelArray);
+		const pricesArray = await scrapePrices(bookInfoArray);
 
-		//!!is this confused? - passing bookModel in still causes side effects!
-		const bookObjectsForRender = bookModelArray.map(book => {
-			pricesArray.forEach(amazonPriceObject => {
-				if (book.model.title === amazonPriceObject.title) {
-					book.model.prices = amazonPriceObject.prices;
+		const bookObjectsForRender = pricesArray.map(amazonPriceObject => {
+			let mergedBookData;
+			bookInfoArray.forEach(book => {
+				if (book.title === amazonPriceObject.title) {
+					mergedBookData = Object.assign({}, book, {
+						prices: amazonPriceObject.prices
+					});
 				}
 			});
-			return book;
+			return mergedBookData;
 		});
 
-		console.log('==================');
-		console.dir(bookObjectsForRender, { depth: 10 });
-		console.log('==================');
-		const books = testModel;
+		const books = bookObjectsForRender;
+		// const books = testBookObjectsForRender;
 		res.render('page', {
 			books
 		});
