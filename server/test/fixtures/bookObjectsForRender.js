@@ -8,12 +8,8 @@ module.exports = [
 		prices: {
 			kindle: { amazon: '5.99', new_from: '—', used_from: '—' },
 			library: { amazon: '20.61', new_from: '20.61', used_from: '46.19' },
-			paperback: { amazon: '5.99', new_from: '4.99', used_from: '5.08' },
-			audible: {
-				amazon: '0.00',
-				new_from: undefined,
-				used_from: undefined
-			},
+			paperback: { amazon: '5.99', new_from: '4.99', used_from: '5.05' },
+			audible: { amazon: '0.00', new_from: '-', used_from: '-' },
 			mp: { amazon: '3', new_from: '3', used_from: '—' }
 		}
 	},
@@ -25,13 +21,9 @@ module.exports = [
 		isbn13: '9781473667723',
 		prices: {
 			kindle: { amazon: '3.99', new_from: '—', used_from: '—' },
-			hardcover: { amazon: '9.35', new_from: '6.25', used_from: '1.69' },
+			hardcover: { amazon: '9.35', new_from: '6.25', used_from: '1.20' },
 			paperback: { amazon: '7.03', new_from: '7.03', used_from: '—' },
-			audible: {
-				amazon: '0.00',
-				new_from: undefined,
-				used_from: undefined
-			}
+			audible: { amazon: '0.00', new_from: '-', used_from: '-' }
 		}
 	},
 	{
@@ -43,12 +35,8 @@ module.exports = [
 		prices: {
 			kindle: { amazon: '5.99', new_from: '—', used_from: '—' },
 			hardcover: { amazon: '14.99', new_from: '8.99', used_from: '6.14' },
-			paperback: { amazon: '6.40', new_from: '4.59', used_from: '0.01' },
-			audible: {
-				amazon: '0.00',
-				new_from: undefined,
-				used_from: undefined
-			},
+			paperback: { amazon: '6.40', new_from: '4.92', used_from: '0.01' },
+			audible: { amazon: '0.00', new_from: '-', used_from: '-' },
 			audio: { amazon: '—', new_from: '27.28', used_from: '—' }
 		}
 	},
@@ -61,12 +49,8 @@ module.exports = [
 		prices: {
 			kindle: { amazon: '5.99', new_from: '—', used_from: '—' },
 			library: { amazon: '20.61', new_from: '20.61', used_from: '46.19' },
-			paperback: { amazon: '5.99', new_from: '4.99', used_from: '5.08' },
-			audible: {
-				amazon: '0.00',
-				new_from: undefined,
-				used_from: undefined
-			},
+			paperback: { amazon: '5.99', new_from: '4.99', used_from: '5.05' },
+			audible: { amazon: '0.00', new_from: '-', used_from: '-' },
 			mp: { amazon: '3', new_from: '3', used_from: '—' }
 		}
 	},
@@ -78,13 +62,9 @@ module.exports = [
 		isbn13: '9781473667723',
 		prices: {
 			kindle: { amazon: '3.99', new_from: '—', used_from: '—' },
-			hardcover: { amazon: '9.35', new_from: '6.25', used_from: '1.69' },
+			hardcover: { amazon: '9.35', new_from: '6.25', used_from: '1.20' },
 			paperback: { amazon: '7.03', new_from: '7.03', used_from: '—' },
-			audible: {
-				amazon: '0.00',
-				new_from: undefined,
-				used_from: undefined
-			}
+			audible: { amazon: '0.00', new_from: '-', used_from: '-' }
 		}
 	},
 	{
@@ -96,12 +76,8 @@ module.exports = [
 		prices: {
 			kindle: { amazon: '5.99', new_from: '—', used_from: '—' },
 			hardcover: { amazon: '14.99', new_from: '8.99', used_from: '6.14' },
-			paperback: { amazon: '6.40', new_from: '4.59', used_from: '0.01' },
-			audible: {
-				amazon: '0.00',
-				new_from: undefined,
-				used_from: undefined
-			},
+			paperback: { amazon: '6.40', new_from: '4.92', used_from: '0.01' },
+			audible: { amazon: '0.00', new_from: '-', used_from: '-' },
 			audio: { amazon: '—', new_from: '27.28', used_from: '—' }
 		}
 	}

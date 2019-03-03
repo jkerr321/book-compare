@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 const getData = async (aisn, browser) => {
 	try {
-		//scrape prices from amazon using puppeteer (or testData if in test mode)
+		//scrape prices from amazon using puppeteer
 		const url = `https://www.amazon.co.uk/gp/product/${aisn}`;
 		const page = await browser.newPage();
 		await page.setViewport({
@@ -15,7 +15,7 @@ const getData = async (aisn, browser) => {
 			waitUntil: 'networkidle2'
 		});
 
-		// array of each row of amazon book format price table
+		// array of each row of amazon price table
 		const htmlArray = await page.$$eval('#twister > .top-level', element =>
 			element.map(el => el.innerText)
 		);
