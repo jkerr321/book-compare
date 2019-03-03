@@ -3,7 +3,7 @@ const getGoodReadBooks = require('../lib/good-reads-api');
 
 // test data sets
 const goodReadsTestResponse = require('../test/fixtures/good-reads-api-output');
-const testBookObjectsForRender = require('../test/fixtures/bookObjectsForRender');
+const testBooksForRender = require('../test/fixtures/bookObjectsForRender');
 
 const renderPriceCompareTable = async (req, res) => {
 	try {
@@ -11,7 +11,7 @@ const renderPriceCompareTable = async (req, res) => {
 		const toReadList = goodReadsTestResponse;
 
 		// for each toRead get price info and add to book object
-		const bookInfoArray = toReadList.map(bookInfo => {
+		const bookDetailsArray = toReadList.map(bookInfo => {
 			return {
 				title: bookInfo.title,
 				author: bookInfo.author,
@@ -21,11 +21,11 @@ const renderPriceCompareTable = async (req, res) => {
 			};
 		});
 
-		const pricesArray = await scrapePrices(bookInfoArray);
+		const bookPricesArray = await scrapePrices(bookDetailsArray);
 
-		const bookObjectsForRender = pricesArray.map(amazonPriceObject => {
+		const bookDetailsWithPrices = bookPricesArray.map(amazonPriceObject => {
 			let mergedBookData;
-			bookInfoArray.forEach(book => {
+			bookDetailsArray.forEach(book => {
 				if (book.title === amazonPriceObject.title) {
 					mergedBookData = Object.assign({}, book, {
 						prices: amazonPriceObject.prices
@@ -35,8 +35,25 @@ const renderPriceCompareTable = async (req, res) => {
 			return mergedBookData;
 		});
 
-		const books = bookObjectsForRender;
-		// const books = testBookObjectsForRender;
+		// TODO should probably do this in the pageScraper.formatData function
+		// check all formats are present, if not add a dummy value for them - this is so the client side table can be sorted
+		const validatedBooksForRender = testBooksForRender.map(book => {
+			// const validatedBooksForRender = booksForRender.map(book => {
+			let validatedBook = book;
+			const requiredFormats = ['kindle', 'paperback', 'hardcover'];
+			requiredFormats.forEach(format => {
+				if (!Object.keys(book.prices).includes(format)) {
+					validatedBook.prices[format] = {
+						amazon: '—',
+						new_from: '—',
+						used_from: '—'
+					};
+				}
+			});
+			return validatedBook;
+		});
+
+		const books = validatedBooksForRender;
 		res.render('page', {
 			books
 		});
