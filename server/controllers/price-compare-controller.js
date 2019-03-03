@@ -3,7 +3,7 @@ const getGoodReadBooks = require('../lib/good-reads-api');
 
 // test data sets
 const goodReadsTestResponse = require('../test/fixtures/good-reads-api-output');
-const testBooksForRender = require('../test/fixtures/bookObjectsForRender');
+const testBookDetailsWithPrices = require('../test/fixtures/bookObjectsForRender');
 
 const renderPriceCompareTable = async (req, res) => {
 	try {
@@ -37,8 +37,8 @@ const renderPriceCompareTable = async (req, res) => {
 
 		// TODO should probably do this in the pageScraper.formatData function
 		// check all formats are present, if not add a dummy value for them - this is so the client side table can be sorted
-		const validatedBooksForRender = testBooksForRender.map(book => {
-			// const validatedBooksForRender = booksForRender.map(book => {
+		// const validatedBooksForRender = testBookDetailsWithPrices.map(book => {
+		const validatedBooksForRender = bookDetailsWithPrices.map(book => {
 			let validatedBook = book;
 			const requiredFormats = ['kindle', 'paperback', 'hardcover'];
 			requiredFormats.forEach(format => {
