@@ -21,6 +21,7 @@ const renderPriceCompareTable = async (req, res) => {
 			};
 		});
 
+		//TODO only pass one book at a time into the scraper so that it's more decoupled?
 		const bookPricesArray = await scrapePrices(bookDetailsArray);
 
 		const bookDetailsWithPrices = bookPricesArray.map(amazonPriceObject => {
@@ -35,25 +36,7 @@ const renderPriceCompareTable = async (req, res) => {
 			return mergedBookData;
 		});
 
-		// TODO should probably do this in the pageScraper.formatData function
-		// check all formats are present, if not add a dummy value for them - this is so the client side table can be sorted
-		// const validatedBooksForRender = testBookDetailsWithPrices.map(book => {
-		const validatedBooksForRender = bookDetailsWithPrices.map(book => {
-			let validatedBook = book;
-			const requiredFormats = ['kindle', 'paperback', 'hardcover'];
-			requiredFormats.forEach(format => {
-				if (!Object.keys(book.prices).includes(format)) {
-					validatedBook.prices[format] = {
-						amazon: '—',
-						new_from: '—',
-						used_from: '—'
-					};
-				}
-			});
-			return validatedBook;
-		});
-
-		const books = validatedBooksForRender;
+		const books = bookDetailsWithPrices;
 		res.render('page', {
 			books
 		});

@@ -61,6 +61,30 @@ const formatData = async dataArray => {
 	}, {});
 };
 
+// check all formats are present, if not add a dummy value for them - this is so the client side table can be sorted correctly
+const validatePrices = amazonPrices => {
+	let validatedPrices = amazonPrices;
+	const requiredFormats = ['kindle', 'paperback', 'hardcover'];
+	requiredFormats.forEach(format => {
+		if (!Object.keys(amazonPrices).includes(format)) {
+			validatedPrices[format] = {
+				amazon: '—',
+				new_from: '—',
+				used_from: '—'
+			};
+		}
+	});
+	return validatedPrices;
+};
+
+const wait = () => {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve();
+		}, 2000);
+	});
+};
+
 const pageScraper = async bookInfoArray => {
 	const resolvedBookPrices = await Promise.all(
 		bookInfoArray.map(async (bookInfo, index) => {
@@ -72,6 +96,7 @@ const pageScraper = async bookInfoArray => {
 					const aisn = isbn.substring(isbn.length - 10);
 					const scrapedDataArray = await getData(aisn);
 					const amazonPrices = await formatData(scrapedDataArray);
+					const validatedPrices = validatePrices(amazonPrices);
 
 					console.info(
 						`scraped and formatted prices for ${
@@ -79,9 +104,11 @@ const pageScraper = async bookInfoArray => {
 						}: ${index} of ${bookInfoArray.length}`
 					);
 
+					await wait(); //??
+
 					return {
 						title: bookInfo.title,
-						prices: amazonPrices
+						prices: validatedPrices
 					};
 				} else {
 					console.info(`no isbn for ${bookInfo.title}`);
