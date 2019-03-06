@@ -25,13 +25,14 @@ const getData = async (aisn, browser) => {
 		const text = await res.text();
 		const $ = cheerio.load(text);
 
-		// TODO put this in a function to be more functional
-		let arrayOfHtmlPriceTableRows = [];
+		// NB this map is a cheerio object and not a regular array.map hence cannot just return the output,
+		// instead need to create a new array and push the output into that
+		let priceTableRowsArray = [];
 		$('#twister > .top-level').map((i, el) => {
-			arrayOfHtmlPriceTableRows.push($(el).text());
+			priceTableRowsArray.push($(el).text());
 		});
 
-		return arrayOfHtmlPriceTableRows;
+		return priceTableRowsArray;
 	} catch (error) {
 		console.log(error);
 	}
@@ -77,6 +78,7 @@ const validatePrices = amazonPrices => {
 	return validatedPrices;
 };
 
+// ?? Can't get this to work in slowing down the calls so not used at the moment
 const wait = () => {
 	return new Promise(resolve => {
 		setTimeout(() => {
@@ -103,8 +105,6 @@ const pageScraper = async bookInfoArray => {
 							bookInfo.title
 						}: ${index} of ${bookInfoArray.length}`
 					);
-
-					await wait(); //??
 
 					return {
 						title: bookInfo.title,
