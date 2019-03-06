@@ -7,26 +7,13 @@ const testBookDetailsWithPrices = require('../test/fixtures/bookObjectsForRender
 
 const renderPriceCompareTable = async (req, res) => {
 	try {
-		// const toReadList = await getGoodReadBooks();
-		const toReadList = goodReadsTestResponse;
-
-		// for each toRead get price info and add to book object
-		const bookDetailsArray = toReadList.map(bookInfo => {
-			return {
-				title: bookInfo.title,
-				author: bookInfo.author,
-				average_rating: bookInfo.average_rating,
-				isbn: bookInfo.isbn,
-				isbn13: bookInfo.isbn13
-			};
-		});
-
-		//TODO only pass one book at a time into the scraper so that it's more decoupled?
-		const bookPricesArray = await scrapePrices(bookDetailsArray);
+		// const toReadList = await getGoodReadBooks(); // production values
+		const toReadList = goodReadsTestResponse; // test values
+		const bookPricesArray = await scrapePrices(toReadList); //?? would it be better to only pass one book at a time into the scraper so that it's more decoupled from the Array?
 
 		const bookDetailsWithPrices = bookPricesArray.map(amazonPriceObject => {
 			let mergedBookData;
-			bookDetailsArray.forEach(book => {
+			toReadList.forEach(book => {
 				if (book.title === amazonPriceObject.title) {
 					mergedBookData = Object.assign({}, book, {
 						prices: amazonPriceObject.prices
@@ -46,10 +33,3 @@ const renderPriceCompareTable = async (req, res) => {
 };
 
 module.exports = renderPriceCompareTable;
-
-/*
-get subset of next 5 from goodReadsList
-scrape prices for them
-update subset to += 5
-go again
-*/
