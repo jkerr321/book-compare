@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
+const { Sema } = require('async-sema');
 const { COOKIE } = require('../../config');
 
 const getData = async (aisn, browser) => {
@@ -22,6 +23,9 @@ const getData = async (aisn, browser) => {
 		};
 
 		const res = await fetch(url, { headers });
+
+		console.log(`This code was returned: ${res.status}, ${res.statusText}`);
+
 		const text = await res.text();
 		const $ = cheerio.load(text);
 
@@ -78,48 +82,52 @@ const validatePrices = amazonPrices => {
 	return validatedPrices;
 };
 
-// ?? Can't get this to work in slowing down the calls so not used at the moment
-const wait = () => {
+const wait = ms => {
 	return new Promise(resolve => {
-		setTimeout(() => {
-			resolve();
-		}, 2000);
+		setTimeout(resolve, ms);
 	});
 };
 
 const pageScraper = async bookInfoArray => {
-	const resolvedBookPrices = await Promise.all(
-		bookInfoArray.map(async (bookInfo, index) => {
-			try {
-				const isbn = bookInfo.isbn ? bookInfo.isbn : bookInfo.isbn13;
+	const sema = new Sema(1);
 
-				if (isbn) {
-					// get Amazon Standard Identification Number - the book’s ISBN in its older, 10-digit version
-					const aisn = isbn.substring(isbn.length - 10);
-					const scrapedDataArray = await getData(aisn);
-					const amazonPrices = await formatData(scrapedDataArray);
-					const validatedPrices = validatePrices(amazonPrices);
+	const queue = bookInfoArray.map((bookInfo, i) => async () => {
+		await sema.acquire();
+		console.log(`processing ${i + 1} of ${bookInfoArray.length}`);
+		const result = await pageScrape(bookInfo, i);
+		await wait(1000);
+		sema.release();
+		return result;
+	});
 
-					console.info(
-						`scraped and formatted prices for ${
-							bookInfo.title
-						}: ${index} of ${bookInfoArray.length}`
-					);
-
-					return {
-						title: bookInfo.title,
-						prices: validatedPrices
-					};
-				} else {
-					console.info(`no isbn for ${bookInfo.title}`);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		})
-	);
+	const resolvedBookPrices = await Promise.all(queue.map(item => item()));
 
 	return resolvedBookPrices.filter(Boolean);
 };
+
+async function pageScrape(bookInfo, index) {
+	try {
+		const isbn = bookInfo.isbn ? bookInfo.isbn : bookInfo.isbn13;
+
+		if (isbn) {
+			// get Amazon Standard Identification Number - the book’s ISBN in its older, 10-digit version
+			const aisn = isbn.substring(isbn.length - 10);
+			const scrapedDataArray = await getData(aisn);
+			const amazonPrices = await formatData(scrapedDataArray);
+			const validatedPrices = validatePrices(amazonPrices);
+
+			console.info(`scraped and formatted prices for ${bookInfo.title}`);
+
+			return {
+				title: bookInfo.title,
+				prices: validatedPrices
+			};
+		} else {
+			console.info(`no isbn for ${bookInfo.title}`);
+		}
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 module.exports = pageScraper;
