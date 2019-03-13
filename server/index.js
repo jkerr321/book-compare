@@ -1,40 +1,58 @@
+const fs = require('fs');
 const scrapePrices = require('./lib/page-scraper');
 const getGoodReadBooks = require('./lib/good-reads-api');
-const outputToCsv = require('./lib/output-to-csv');
+const { getCsvName, exportToCsv, deleteOldCsv } = require('./lib/csv-helpers');
 // test data sets
 const goodReadsTestResponse = require('./test/fixtures/good-reads-api-output');
 const testBookDetailsWithPrices = require('./test/fixtures/book-objects-for-render');
 
+const isScrapeWithinPreviousDay = (timestampNow, csvName) => {
+	const twentyFourHours = 86400000;
+	const timestampPreviousString = csvName.split('.')[0];
+	const timestampPrevious = new Date(parseInt(timestampPreviousString));
+
+	if (timestampNow - timestampPrevious < twentyFourHours) {
+		return true;
+	} else {
+		console.log('prices scraped over 24 hours ago. Scraping for fresh prices...');
+		return false;
+	}
+}
+
 const renderPriceCompareTable = (async () => {
+	const timestampNow = new Date().valueOf();
+	const existingCsv = getCsvName();
+
 	try {
-		// const toReadList = await getGoodReadBooks(); // production values
-		// // const toReadList = toReadList1.slice(0, 49); // production values
-		// const toReadList = goodReadsTestResponse; // test values
-		// const bookPricesArray = await scrapePrices(toReadList);
+		const pricesScrapedInLast24Hours = isScrapeWithinPreviousDay(timestampNow, existingCsv);
+		if (pricesScrapedInLast24Hours) {
+			console.log('prices scraped in the last 24 hours - please use existing output.csv file');
+		} else {
+			const toReadList = await getGoodReadBooks(); // production values			
+			// const toReadList = goodReadsTestResponse; // test values
+			const bookPricesArray = await scrapePrices(toReadList);
+	
+			const bookDetailsWithPrices = bookPricesArray.map(amazonPriceObject => {
+				let mergedBookData;
+				toReadList.forEach(book => {
+					if (book.title === amazonPriceObject.title) {
+						mergedBookData = Object.assign({}, book, {
+							prices: amazonPriceObject.prices
+						});
+					}
+				});
+				return mergedBookData;
+			});
 
-		// const bookDetailsWithPrices = bookPricesArray.map(amazonPriceObject => {
-		// 	let mergedBookData;
-		// 	toReadList.forEach(book => {
-		// 		if (book.title === amazonPriceObject.title) {
-		// 			mergedBookData = Object.assign({}, book, {
-		// 				prices: amazonPriceObject.prices
-		// 			});
-		// 		}
-		// 	});
-		// 	return mergedBookData;
-		// });
-
-		const books = testBookDetailsWithPrices
-
-		console.log('==================');
-		console.dir(books, { depth: 10 });
-		console.log('==================');
-
-		return outputToCsv(books);
-
+			const books = bookDetailsWithPrices // production values
+			// const books = testBookDetailsWithPrices // test values
+			exportToCsv(books, timestampNow);
+			deleteOldCsv(existingCsv);
+			console.log(`Prices exported to ${getCsvName()} csv in project root :)`)
+		}
 	} catch (err) {
 		console.log(err);
 	}
 })();
 
-module.exports = renderPriceCompareTable;
+module.exports = { renderPriceCompareTable, isScrapeWithinPreviousDay };
