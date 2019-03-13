@@ -8,12 +8,12 @@
 	"dependencies": {
 		"async-sema": "^3.0.0",
 		"cheerio": "^1.0.0-rc.2",
-		"express": "^4.16.4",
-		"express-handlebars": "^3.0.0",
 		"node-fetch": "^2.3.0",
 		"nodemon": "^1.18.5",
-		"path": "^0.12.7",
 		"xml-js": "^1.6.8"
 	},
-	"devDependencies": {}
+	"devDependencies": {},
+	"scripts": {
+		"start": "node server/index.js"
+	}
 }
