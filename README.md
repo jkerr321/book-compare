@@ -1,9 +1,7 @@
 
 BookCompare
 ==========
-A little app that provides a list of your Goodreads `To Read` list in a sortable table, along with their Amazon prices for different formats:
-
-![image](https://user-images.githubusercontent.com/17846996/53880669-7a2a8100-4009-11e9-9fb5-47e350c44cbf.png)
+A little tool that outputs the books in your Goodreads `To Read` list in a csv file, along with their Amazon prices for different formats.
 
 Table of Contents
 -----------------
@@ -11,6 +9,7 @@ Table of Contents
  - [Why](#why-does-this-exist)
  - [Requirements](#requirements)
  - [Usage](#usage)
+ - [Troubleshooting](#Troubleshooting)
  - [Things still to do](#things-still-todo)
 
 Why does this exist
@@ -22,8 +21,10 @@ Requirements
 ------------
 
  - [Goodreads API key](https://www.goodreads.com/api/keys)
- - Goodreads User ID - the 8 digit number in your Goodreads profile URL
- - Cookie value
+ - Goodreads User ID - the 8 digit number in your Goodreads profile URL:
+ - Amazon cookie value - visit amazon.co.uk, and copy the request cookie value from the Chrome dev tools network tab (you will need to reload the page if you didn't already have it open)
+
+ You should only need to retrieve these values once.
 
 Usage
 -----
@@ -33,16 +34,22 @@ Currently BookCompare is only able to be run locally:
  - Clone the BookCompare repo to your machine
  - Create a `config.js` file at the root level, using the `config-example.js` file as a template
  - Run `npm install`
- - Run `node app.js`
- - Visit `localhost:8001` in your browser to see your table of books and prices
+ - Run `npm start`
+ 
+ The tool will retrieve your goodReads list from the goodReads API, then scrape Amazon for the prices of those books. Both of those things take time, but you can watch the progress via the logs in your console. Once the tool has prices for all your 'To Read' list it will output them to the root of the project folder, to a csv file with the name format `[unix-timestamp].output.csv`
 
+Troubleshooting
+-----
+
+If you're seeing an error during the price scraping step it may be for a couple of reasons:
+- Your cookie is out of date. As far as I can tell Amazon don't have timestamps on these cookies, but if you have been using the same one for a long time (months and months) Amazon may block the requests. Try updating your cookie value in `config.js`
+- Your Goodreads 'To Read' list is too long. The longest list I've tested this with is about 130 books. When Amazon receives too many requests in a short time it eventually blocks them. Rate limiting is in place in the tool to stop this from happening and works with the lists I've tried, but if you have hundreds and hundreds of books in your list you _might_ need pass in a subset (you will need to manually edit the code for this).
 
 Things still to do
 ---------------------
 
- - Currently Amazon blocks the request when more than about 15 calls are made at a time - fix this somehow: waiting? Batching?
- - Table headings on two lines without messing everything else up (heading and aria-label)
- - Add currency signs
- - Table sort so null values always stay at the bottom of the list
- - Add link for each book
- - Make cli tool instead??
+ - Output to google doc
+ - Add link for each book to output
+ - Make this a proper cli tool with `Yargs`
+ - Publish as module?
+ - Get a better name :D
