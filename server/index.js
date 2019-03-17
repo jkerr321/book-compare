@@ -24,12 +24,13 @@ const isScrapeWithinPreviousDay = (timestampNow, csvName) => {
 	}
 }
 
-const renderPriceCompareTable = (async () => {
+const init = (async () => {
 	const timestampNow = new Date().valueOf();
 	const existingCsv = getCsvName();
 
 	try {
 		const pricesScrapedInLast24Hours = isScrapeWithinPreviousDay(timestampNow, existingCsv);
+
 		if (pricesScrapedInLast24Hours) {
 			console.log('prices scraped in the last 24 hours - please use existing output.csv file');
 		} else {
@@ -41,18 +42,24 @@ const renderPriceCompareTable = (async () => {
 				let mergedBookData;
 				toReadList.forEach(book => {
 					if (book.title === amazonPriceObject.title) {
-						mergedBookData = Object.assign({}, book, {
-							prices: amazonPriceObject.prices
-						});
+						mergedBookData = Object.assign(
+							{}, 
+							book, 
+							{ prices: amazonPriceObject.prices },
+							{ amazon_link: amazonPriceObject.amazon_link }
+						);
 					}
 				});
+
 				return mergedBookData;
 			});
 
 			const books = bookDetailsWithPrices // production values
 			// const books = testBookDetailsWithPrices // test values
+
 			exportToCsv(books, timestampNow);
 			if (existingCsv) deleteOldCsv(existingCsv);
+
 			console.log(`Prices exported to ${getCsvName()} csv in project root :)`)
 		}
 	} catch (err) {
@@ -60,4 +67,4 @@ const renderPriceCompareTable = (async () => {
 	}
 })();
 
-module.exports = { renderPriceCompareTable, isScrapeWithinPreviousDay };
+module.exports = { init, isScrapeWithinPreviousDay };

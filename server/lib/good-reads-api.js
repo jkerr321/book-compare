@@ -4,7 +4,7 @@ const { GOODREADS_KEY, GOODREADS_USER } = require('../../config');
 
 const convertToJson = async result => {
 	try {
-		const text = await result.text(); //?? Not sure why this needs to be awaited but it fails without the await
+		const text = await result.text();
 		const partConverted = convert.xml2json(text, {
 			compact: true,
 			spaces: 4
