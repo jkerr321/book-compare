@@ -120,8 +120,9 @@ async function pageScrape(bookInfo, index) {
 
 			return {
 				title: bookInfo.title,
-				prices: validatedPrices
-			};
+				prices: validatedPrices,
+				amazon_link: `https://www.amazon.co.uk/gp/product/${aisn}`
+			}
 		} else {
 			console.info(`no isbn for ${bookInfo.title}`);
 		}
