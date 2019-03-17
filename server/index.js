@@ -7,15 +7,20 @@ const goodReadsTestResponse = require('./test/fixtures/good-reads-api-output');
 const testBookDetailsWithPrices = require('./test/fixtures/book-objects-for-export');
 
 const isScrapeWithinPreviousDay = (timestampNow, csvName) => {
-	const twentyFourHours = 86400000;
-	const timestampPreviousString = csvName.split('.')[0];
-	const timestampPrevious = new Date(parseInt(timestampPreviousString));
-
-	if (timestampNow - timestampPrevious < twentyFourHours) {
-		return true;
-	} else {
-		console.log('prices scraped over 24 hours ago. Scraping for fresh prices...');
+	if (!csvName) {
+		console.log('no existing csv file, scraping for fresh prices');
 		return false;
+	} else {
+		const twentyFourHours = 86400000;
+		const timestampPreviousString = csvName.split('.')[0];
+		const timestampPrevious = new Date(parseInt(timestampPreviousString));
+
+		if (timestampNow - timestampPrevious < twentyFourHours) {
+			return true;
+		} else {
+			console.log('prices scraped over 24 hours ago. Scraping for fresh prices...');
+			return false;
+		}
 	}
 }
 
@@ -47,7 +52,7 @@ const renderPriceCompareTable = (async () => {
 			const books = bookDetailsWithPrices // production values
 			// const books = testBookDetailsWithPrices // test values
 			exportToCsv(books, timestampNow);
-			deleteOldCsv(existingCsv);
+			if (existingCsv) deleteOldCsv(existingCsv);
 			console.log(`Prices exported to ${getCsvName()} csv in project root :)`)
 		}
 	} catch (err) {
