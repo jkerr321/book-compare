@@ -22,7 +22,7 @@ Requirements
 ------------
 
  - [Goodreads API key](https://www.goodreads.com/api/keys)
- - Goodreads User ID - the 8 digit number in your Goodreads profile URL:
+ - Goodreads User ID - the 8 digit number in your Goodreads profile URL
  - Amazon cookie value - visit amazon.co.uk, and copy the request cookie value from the Chrome dev tools network tab (you will need to reload the page if you didn't already have it open)
 
  You should only need to retrieve these values once.
