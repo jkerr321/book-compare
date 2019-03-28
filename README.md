@@ -57,4 +57,4 @@ Things still to do
 A note on the name
 ---------------------
 
- - Tsundoku is a [Japaenese word fhich describes the habit of accumulating more books than you can actually get around to reading](https://theculturetrip.com/asia/japan/articles/theres-a-special-japanese-word-for-people-addicted-to-buying-books/)
+Tsundoku is a [Japaenese word](https://theculturetrip.com/asia/japan/articles/theres-a-special-japanese-word-for-people-addicted-to-buying-books/), which describes the habit of accumulating more books than you can actually get around to reading.
