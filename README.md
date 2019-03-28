@@ -49,7 +49,7 @@ Things still to do
 ---------------------
 
  - Output to google doc
- - Add link for each book to output
  - Make this a proper cli tool with `Yargs`
- - Publish as module?
+ - Publish as module on NPM
+ - Update README with shields
  - Get a better name :D
