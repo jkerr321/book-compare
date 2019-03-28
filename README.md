@@ -1,5 +1,5 @@
 
-BookCompare
+Tsundoku
 ==========
 A little tool that outputs the books in your Goodreads `To Read` list in a csv file, along with their Amazon prices for different formats.
 
@@ -11,6 +11,7 @@ Table of Contents
  - [Usage](#usage)
  - [Troubleshooting](#Troubleshooting)
  - [Things still to do](#things-still-todo)
+ - [A note on the name](#a-note-on-the-name)
 
 Why does this exist
 ------------
@@ -52,4 +53,8 @@ Things still to do
  - Make this a proper cli tool with `Yargs`
  - Publish as module on NPM
  - Update README with shields
- - Get a better name :D
+ 
+A note on the name
+---------------------
+
+ - Tsundoku is a [Japaenese word fhich describes the habit of accumulating more books than you can actually get around to reading](https://theculturetrip.com/asia/japan/articles/theres-a-special-japanese-word-for-people-addicted-to-buying-books/)
