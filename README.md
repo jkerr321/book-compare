@@ -49,6 +49,7 @@ If you're seeing an error during the price scraping step it may be for a couple 
 Things still to do
 ---------------------
 
+ - Tests
  - Output to google doc
  - Make this a proper cli tool with `Yargs`
  - Publish as module on NPM

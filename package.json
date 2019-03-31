@@ -1,10 +1,10 @@
 {
-	"name": "compare-book-prices",
+	"name": "tsundoku",
 	"version": "1.0.0",
 	"description": "",
-	"main": "app.js",
-	"author": "jennifer kerr",
-	"license": "ISC",
+	"main": "server/index.js",
+	"author": "jennifer johnson",
+	"license": "MIT",
 	"dependencies": {
 		"async-sema": "^3.0.0",
 		"cheerio": "^1.0.0-rc.2",
