@@ -2,7 +2,7 @@
 	"name": "tsundoku",
 	"version": "1.0.0",
 	"description": "",
-	"main": "server/index.js",
+	"bin": "./bin/tsundoku.js",
 	"author": "jennifer johnson",
 	"license": "MIT",
 	"dependencies": {
@@ -10,7 +10,8 @@
 		"cheerio": "^1.0.0-rc.2",
 		"node-fetch": "^2.3.0",
 		"nodemon": "^1.18.5",
-		"xml-js": "^1.6.8"
+		"xml-js": "^1.6.8",
+		"yargs": "^13.2.2"
 	},
 	"devDependencies": {},
 	"scripts": {
