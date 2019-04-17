@@ -23,15 +23,25 @@ Requirements
 ------------
 
  - Goodreads User ID - the 8 digit number in your Goodreads profile URL
+ - [Goodreads API key](https://www.goodreads.com/api/keys)
+ - Amazon cookie value - visit amazon.co.uk, and copy the request cookie value from the Chrome dev tools network tab (you will need to reload the page if you didn't already have it open)
 
 Usage
 -----
 
-Output a csv file of your Good Reads 'Want to Read' list with:
+The first time you use the tool you will need to pass in your Good Reads API key, your Good Reads user ID, and a value for an Amazon cookie. These will be stored so you won't need to provide them again, unless you want to update their values:
 
 ```
-$ npx tsundoku --goodReadsId=<your_id>
+$ npx tsundoku --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>
 ```
+
+Thereafter you can run the tool without any arguments passed in:
+
+```
+$ npx tsundoku
+```
+
+The output is a csv file in the module root - the name of the file will be logged to your terminal and you should be able to open it by doing `command + click` on the filename (on Mac) or `control + click` on the filename (on Windows)
 
 Troubleshooting
 -----
@@ -57,14 +67,15 @@ To run locally:
 Things still to do
 ---------------------
 
- - Tests
+ - Error handling
  - Help pages
+ - Tests
  - Linting
+ - Update README to elaborate on how to get Good Reads API key, Good Reads ID, and cookie from Amazon
+ - Make it clearer where the output file is stored / make it easier to access
  - Contribution guidelines
  - Output to google doc
- - Make file output easier to access
  - Refactor to work more like cli tool and less like an app
- - Allow user to update cookie
  - Allow user to pass limit of how many books to scrape
  - Update README with shields
  
