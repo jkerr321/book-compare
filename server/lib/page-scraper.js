@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const { Sema } = require('async-sema');
 const { COOKIE } = require('../../config');
 
-const getData = async (aisn, browser) => {
+const getData = async (aisn) => {
 	try {
 		const url = `https://www.amazon.co.uk/gp/product/${aisn}`;
 		const headers = {
@@ -88,13 +88,13 @@ const wait = ms => {
 	});
 };
 
-const pageScraper = async bookInfoArray => {
+const pageScraper = async (bookInfoArray) => {
 	const sema = new Sema(1);
 
 	const queue = bookInfoArray.map((bookInfo, i) => async () => {
 		await sema.acquire();
 		console.log(`processing ${i + 1} of ${bookInfoArray.length}`);
-		const result = await pageScrape(bookInfo, i);
+		const result = await pageScrape(bookInfo);
 		await wait(1000);
 		sema.release();
 		return result;
@@ -105,7 +105,7 @@ const pageScraper = async bookInfoArray => {
 	return resolvedBookPrices.filter(Boolean);
 };
 
-async function pageScrape(bookInfo, index) {
+async function pageScrape(bookInfo) {
 	try {
 		const isbn = bookInfo.isbn ? bookInfo.isbn : bookInfo.isbn13;
 

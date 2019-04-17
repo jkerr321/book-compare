@@ -24,7 +24,7 @@ const isScrapeWithinPreviousDay = (timestampNow, csvName) => {
 	}
 }
 
-const init = async (config) => {
+const init = async () => {
 	const timestampNow = new Date().valueOf();
 	const existingCsv = getCsvName();
 
@@ -34,7 +34,7 @@ const init = async (config) => {
 		if (pricesScrapedInLast24Hours) {
 			console.log('prices scraped in the last 24 hours - please use existing output.csv file');
 		} else {
-			// const toReadList = await getGoodReadBooks(config); // production values
+			// const toReadList = await getGoodReadBooks(); // production values
 			const toReadList = goodReadsTestResponse; // test values
 			const bookPricesArray = await scrapePrices(toReadList);
 

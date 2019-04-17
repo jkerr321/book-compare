@@ -1,14 +1,22 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const argv = require('yargs').argv;
-const config = require('../config');
 const { init } = require('../server/index')
 
-if (argv.goodReadsId) {
-    config.GOODREADS_USER = argv.goodReadsId;
+if (argv.goodReadsId && argv.goodReadsKey && argv.cookie) {
+    const config = {
+        GOODREADS_USER: argv.goodReadsId,
+        GOODREADS_KEY: argv.goodReadsKey,
+        COOKIE: argv.cookie
+    }
 
-    init(config);
-} else {
-    console.log('please enter your Good Reads user ID - you can find it on the end of the URL of your Good Reads profile page')
-}
+    // add config vars to config file
+    fs.writeFileSync('config.js', `module.exports = ${JSON.stringify(config)}`, err => {
+        console.log(`error writing config file: ${error}`);
+    })
 
-//TODO handle when cookie needs updating
+    } 
+    // else {
+        //     console.log('a required argument is missing, please provide a value for goodReadsId, goodReadsKey, and cookie')
+        // }
+init();

@@ -23,6 +23,8 @@ Requirements
 ------------
 
  - Goodreads User ID - the 8 digit number in your Goodreads profile URL
+ - [Goodreads API key](https://www.goodreads.com/api/keys)
+ - Amazon cookie value - visit amazon.co.uk, and copy the request cookie value from the Chrome dev tools network tab (you will need to reload the page if you didn't already have it open)
 
 Usage
 -----
@@ -57,14 +59,13 @@ To run locally:
 Things still to do
 ---------------------
 
- - Tests
+ - Make it clearer where the output file is stored / make it easier to access
  - Help pages
+ - Tests
  - Linting
  - Contribution guidelines
  - Output to google doc
- - Make file output easier to access
  - Refactor to work more like cli tool and less like an app
- - Allow user to update cookie
  - Allow user to pass limit of how many books to scrape
  - Update README with shields
  
