@@ -16,7 +16,7 @@ if (argv.goodReadsId && argv.goodReadsKey && argv.cookie) {
     })
 
     } 
-    // else {
-        //     console.log('a required argument is missing, please provide a value for goodReadsId, goodReadsKey, and cookie')
-        // }
+
+    //TODO error handling
+
 init();
