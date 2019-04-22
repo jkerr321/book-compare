@@ -15,8 +15,8 @@ if (argv.goodReadsId && argv.goodReadsKey && argv.cookie) {
         console.log(`error writing config file: ${error}`);
     })
 
-    } 
+}
 
-    //TODO error handling
+//TODO error handling
 
 init();

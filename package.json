@@ -1,9 +1,13 @@
 {
 	"name": "tsundoku",
-	"version": "3.0.0",
+	"version": "3.0.2",
 	"description": "",
 	"bin": "./bin/tsundoku.js",
 	"author": "jennifer johnson",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jkerr321/tsundoku.git"
+	},
 	"license": "MIT",
 	"dependencies": {
 		"async-sema": "^3.0.0",

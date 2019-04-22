@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const convert = require('xml-js');
-const { GOODREADS_KEY, GOODREADS_ID } = require('../../config');
+const { GOODREADS_KEY, GOODREADS_USER } = require('../../config');
 
 const convertToJson = async result => {
 	try {
@@ -16,7 +16,7 @@ const convertToJson = async result => {
 };
 
 const getBookInfo = async () => {
-	try {		
+	try {
 		const apiResponse = await fetch(
 			`https://www.goodreads.com/review/list/${GOODREADS_USER}.xml?key=${GOODREADS_KEY}&v=2&shelf=to-read&per_page=200&page=1`
 		);
