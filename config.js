@@ -1,1 +1,1 @@
-module.exports = {"GOODREADS_USER":"xxxxxxxxxxx","GOODREADS_KEY":"xxxxxxxxxxxxxxxxxxxxxxxxx","COOKIE":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+module.exports = {"GOODREADS_USER":"xxxxxxxxxxxxxxxxxx","GOODREADS_KEY":"xxxxxxxxxxxxxxxxxxxxxxxxx","COOKIE":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
