@@ -11,10 +11,10 @@ if (argv.goodReadsId && argv.goodReadsKey && argv.cookie) {
     }
 
     // add config vars to config file
-    fs.writeFileSync('config.js', `module.exports = ${JSON.stringify(config)}`, err => {
-        console.log(`error writing config file: ${error}`);
+    fs.writeFileSync(`${__dirname}/../config.js`, `module.exports = ${JSON.stringify(config)}`, err => {
+        if (err) console.error(`error writing config file: ${error}`);
+        else console.log('updated config with your options');
     })
-
 }
 
 //TODO error handling

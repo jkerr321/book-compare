@@ -3,7 +3,7 @@ Tsundoku
 ==========
 A tool that outputs the books in your Goodreads `To Read` list in a csv file, along with their Amazon prices for different formats.
 
-**NOTE** This is a work in progress - it's not good at telling you when there are errors, it doesn't have tests, and can be buggy(!) I'm working on it slowly in the background and will get to a stable version eventually, but am making it public now in the spirit of iterative release and making work visible early :)
+**NOTE** This is a work in progress - it's not good at telling you when there are errors, and it doesn't have tests or linting(!) I'm working on it slowly in the background and will get to a stable version eventually, but am making it public now in the spirit of iterative release and making work visible early :)
 
 Table of Contents
 -----------------
@@ -26,7 +26,7 @@ Requirements
 
  - Goodreads User ID - the 8 digit number in your Goodreads profile URL
  - [Goodreads API key](https://www.goodreads.com/api/keys)
- - Amazon cookie value - visit amazon.co.uk, and copy the request cookie value from the Chrome dev tools network tab (you will need to reload the page if you didn't already have it open)
+ - Amazon cookie value - visit amazon.co.uk, and copy the request cookie value from the Chrome dev tools network tab (you will need to reload the page if you didn't already have it open). Copying the cookie from a browser while in incognito / private mode is ideal as the cookie is shorter and less prone to be incorrectly parsed by bash.
 
 Usage
 -----
@@ -36,6 +36,8 @@ The first time you use the tool you will need to pass in your Good Reads API key
 ```
 $ npx tsundoku --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>
 ```
+
+**Note:** wrap the cookie value in single quotes (`'`) when you pass it into the `cookie` command - this will stop `bash` expanding any of the `=` in the cookie into variables which would cause the script to error
 
 Thereafter you can run the tool without any arguments passed in:
 
@@ -57,14 +59,17 @@ Development
 
 To run locally:
 
- - Clone the BookCompare repo to your machine
- - Create a `config.js` file at the root level, using the `config-example.js` file as a template
+ - Clone the Tsundoku repo to your machine
  - Do `npm install`
- - Run with `./bin/tsundoku.js --goodReadsId=<value>`
+ - Run with `./bin/tsundoku.js --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>`
 
- //TODO how to get config requirements
- 
  The tool will retrieve your goodReads list from the goodReads API, then scrape Amazon for the prices of those books. Both of those things take time, but you can watch the progress via the logs in your console. Once the tool has prices for all your 'To Read' list it will output them to the root of the project folder, to a csv file with the name format `[unix-timestamp].output.csv`
+
+There are a set of test values that you can play around with in `./server/test`:
+
+ - `good-reads-api-output` is a mocked set of returned and formatted results from the Good Reads API, use this to save yourself having to hit the Good Reads API every time you want to run Tsundoku during development. These values have already been imported into `index.js` in the relevant place as `goodReadsTestResponse` - to use them just comment out the line using production values and uncomment the line that uses the test values.
+ - `book-objects-for-export` is a mocked set of returned and formatted results from the Amazon price scrape, use this to save yourself having to scrape prices from Amazon every time you want to run Tsundoku during development. These values have already been imported into `index.js` in the relevant place as `testBookDetailsWithPrices` - to use them just comment out the line using production values and uncomment the line that uses the test values.
+ 
 
 Things still to do
 ---------------------
@@ -74,12 +79,11 @@ Things still to do
  - Tests
  - Linting
  - Update README to elaborate on how to get Good Reads API key, Good Reads ID, and cookie from Amazon
- - Make it clearer where the output file is stored / make it easier to access
  - Contribution guidelines
  - Output to google doc
  - Refactor to work more like cli tool and less like an app
  - Allow user to pass limit of how many books to scrape
- - Update README with shields
+ - Update README with shields?
  
 A note on the name
 ---------------------

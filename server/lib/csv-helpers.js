@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 
 const getCsvName = () => {
-    const files = fs.readdirSync('./', (err, files) => {
+    const files = fs.readdirSync(`${__dirname}/../..`, (err, files) => {
         if (err) {
             console.log('err', err);
         } else {
@@ -17,7 +17,7 @@ const getCsvName = () => {
 
 const deleteOldCsv = (csvName) => {
     if (csvName) {
-        fs.unlink(`./${csvName}`, (err) => {
+        fs.unlink(`${__dirname}/../../${csvName}`, (err) => {
             if (err) {
                 console.error(err)
             } else {
@@ -28,7 +28,7 @@ const deleteOldCsv = (csvName) => {
 }
 
 const exportToCsv = (booksArray, timestamp) => {
-    const filename = `./${timestamp}.output.csv`;
+    const filename = `${__dirname}/../../${timestamp}.output.csv`;
     const output = [['Title', 'Author', 'Goodreads Rating', 'Kindle Price', 'Hardcover Price New', 'Hardcover Price Used', 'Paperback Price New', 'Paperback Price New', 'link']]; // holds all rows of data
 
     booksArray.forEach((book) => {
@@ -49,4 +49,4 @@ const exportToCsv = (booksArray, timestamp) => {
     fs.writeFileSync(filename, output.join(os.EOL));
 }
 
-module.exports = {exportToCsv, deleteOldCsv, getCsvName};
+module.exports = { exportToCsv, deleteOldCsv, getCsvName };

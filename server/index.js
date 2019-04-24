@@ -32,7 +32,7 @@ const init = async () => {
 		const pricesScrapedInLast24Hours = isScrapeWithinPreviousDay(timestampNow, existingCsv);
 
 		if (pricesScrapedInLast24Hours) {
-			console.log('prices scraped in the last 24 hours - please use existing output.csv file');
+			console.log('prices scraped in the last 24 hours - please use existing output.csv file (or delete that csv file if you\'d like to get new prices)');
 		} else {
 			const toReadList = await getGoodReadBooks(); // production values
 			// const toReadList = goodReadsTestResponse; // test values
@@ -43,8 +43,8 @@ const init = async () => {
 				toReadList.forEach(book => {
 					if (book.title === amazonPriceObject.title) {
 						mergedBookData = Object.assign(
-							{}, 
-							book, 
+							{},
+							book,
 							{ prices: amazonPriceObject.prices },
 							{ amazon_link: amazonPriceObject.amazon_link }
 						);
@@ -60,7 +60,8 @@ const init = async () => {
 			exportToCsv(books, timestampNow);
 			if (existingCsv) deleteOldCsv(existingCsv);
 
-			console.log(`Prices exported to ${getCsvName()} csv in project root :)`)
+			console.log(`** Success! Prices have been exported to ${getCsvName()} in the Tsundoku project root :) **`)
+			console.log(`** The full file path for your book price csv file is: ${__dirname}/${getCsvName()} **`);
 		}
 	} catch (err) {
 		console.log(err);
