@@ -31,18 +31,22 @@ Requirements
 Usage
 -----
 
-The first time you use the tool you will need to pass in your Good Reads API key, your Good Reads user ID, and a value for an Amazon cookie. These will be stored so you won't need to provide them again, unless you want to update their values:
+### Setting config values 
+
+The first time you use the tool you will need to pass in your Good Reads API key, your Good Reads user ID, and a value for an Amazon cookie using the `setConfig` command. These will be stored so you won't need to provide them again. You can use the `setConfig` command at any time to update any of these values.
 
 ```
-$ npx tsundoku --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>
+$ npx tsundoku setConfig --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>
 ```
 
 **Note:** wrap the cookie value in single quotes (`'`) when you pass it into the `cookie` command - this will stop `bash` expanding any of the `=` in the cookie into variables which would cause the script to error
 
-Thereafter you can run the tool without any arguments passed in:
+### Running the tool
+
+Once you've set the config values you can run Tsundoku to output your price list csv file using the `run` command:
 
 ```
-$ npx tsundoku
+$ npx tsundoku run
 ```
 
 The output is a csv file in the module root - the name of the file will be logged to your terminal and you should be able to open it by doing `command + click` on the filename (on Mac) or `control + click` on the filename (on Windows)

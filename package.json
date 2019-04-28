@@ -1,24 +1,76 @@
 {
-	"name": "tsundoku",
-	"version": "3.0.3",
-	"description": "",
-	"bin": "./bin/tsundoku.js",
-	"author": "jennifer johnson",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/jkerr321/tsundoku.git"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"async-sema": "^3.0.0",
-		"cheerio": "^1.0.0-rc.2",
-		"node-fetch": "^2.3.0",
-		"nodemon": "^1.18.5",
-		"xml-js": "^1.6.8",
-		"yargs": "^13.2.2"
-	},
-	"devDependencies": {},
-	"scripts": {
-		"start": "node server/index.js"
-	}
+  "_from": "tsundoku",
+  "_id": "tsundoku@3.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-/HxPrAfN+CR9jKNOgus9kMl2FrrA6RCEcDzyTW3U4lh543SCAicb1qMR0qCDxwFrsFOVvmHABZtBXQjGGyNI7w==",
+  "_location": "/tsundoku",
+  "_phantomChildren": {
+    "decamelize": "1.2.0",
+    "emoji-regex": "7.0.3",
+    "is-stream": "1.1.0",
+    "locate-path": "3.0.0",
+    "mem": "4.3.0",
+    "nice-try": "1.0.5",
+    "npm-run-path": "2.0.2",
+    "p-finally": "1.0.0",
+    "path-key": "2.0.1",
+    "pump": "3.0.0",
+    "require-directory": "2.1.1",
+    "set-blocking": "2.0.0",
+    "shebang-command": "1.2.0",
+    "signal-exit": "3.0.2",
+    "strip-eof": "1.0.0",
+    "which": "1.2.12",
+    "wrap-ansi": "2.1.0"
+  },
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "tsundoku",
+    "name": "tsundoku",
+    "escapedName": "tsundoku",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/tsundoku/-/tsundoku-3.1.0.tgz",
+  "_shasum": "095f9afeeb7df643c69d8827430e9f29f5390832",
+  "_spec": "tsundoku",
+  "_where": "/Users/jenniferkerr/projects",
+  "author": {
+    "name": "jennifer johnson"
+  },
+  "bin": {
+    "tsundoku": "./bin/tsundoku.js"
+  },
+  "bugs": {
+    "url": "https://github.com/jkerr321/tsundoku/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "async-sema": "^3.0.0",
+    "cheerio": "^1.0.0-rc.2",
+    "node-fetch": "^2.3.0",
+    "nodemon": "^1.18.5",
+    "xml-js": "^1.6.8",
+    "yargs": "^13.2.2"
+  },
+  "deprecated": false,
+  "description": "Tsundoku ========== A tool that outputs the books in your Goodreads `To Read` list in a csv file, along with their Amazon prices for different formats.",
+  "devDependencies": {},
+  "homepage": "https://github.com/jkerr321/tsundoku#readme",
+  "license": "MIT",
+  "name": "tsundoku",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkerr321/tsundoku.git"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "version": "3.1.0"
 }

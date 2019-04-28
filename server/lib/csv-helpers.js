@@ -28,7 +28,7 @@ const deleteOldCsv = (csvName) => {
 }
 
 const exportToCsv = (booksArray, timestamp) => {
-    const filename = `${__dirname}/../../${timestamp}.output.csv`;
+    const filename = `${__dirname}/../../${timestamp}.output.csv`;    
     const output = [['Title', 'Author', 'Goodreads Rating', 'Kindle Price', 'Hardcover Price New', 'Hardcover Price Used', 'Paperback Price New', 'Paperback Price New', 'link']]; // holds all rows of data
 
     booksArray.forEach((book) => {
@@ -49,4 +49,4 @@ const exportToCsv = (booksArray, timestamp) => {
     fs.writeFileSync(filename, output.join(os.EOL));
 }
 
-module.exports = { exportToCsv, deleteOldCsv, getCsvName };
+module.exports = {exportToCsv, deleteOldCsv, getCsvName};

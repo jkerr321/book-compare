@@ -43,8 +43,8 @@ const init = async () => {
 				toReadList.forEach(book => {
 					if (book.title === amazonPriceObject.title) {
 						mergedBookData = Object.assign(
-							{},
-							book,
+							{}, 
+							book, 
 							{ prices: amazonPriceObject.prices },
 							{ amazon_link: amazonPriceObject.amazon_link }
 						);
