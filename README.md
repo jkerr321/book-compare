@@ -65,7 +65,8 @@ To run locally:
 
  - Clone the Tsundoku repo to your machine
  - Do `npm install`
- - Run with `./bin/tsundoku.js --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>`
+ - Set config with `./bin/tsundoku.js setConfig --goodReadsId=<your_id> --goodReadsKey=<your_key> --cookie=<cookie_value>`
+ - Run with `./bin/tsundoku.js run`
 
  The tool will retrieve your goodReads list from the goodReads API, then scrape Amazon for the prices of those books. Both of those things take time, but you can watch the progress via the logs in your console. Once the tool has prices for all your 'To Read' list it will output them to the root of the project folder, to a csv file with the name format `[unix-timestamp].output.csv`
 

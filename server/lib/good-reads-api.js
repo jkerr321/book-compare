@@ -16,12 +16,6 @@ const convertToJson = async result => {
 };
 
 const getBookInfo = async () => {
-	console.log('==================');
-	console.log('gothere3');
-	console.log('==================');
-	console.log('==================');
-	console.log('GOODREADS_KEY', GOODREADS_KEY);
-	console.log('==================');
 	
 	try {
 		const apiResponse = await fetch(
