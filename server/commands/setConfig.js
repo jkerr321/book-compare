@@ -4,7 +4,7 @@ const configFile = require('../../config');
 
 exports.command = 'setConfig [goodReadsId] [goodReadsKey] [cookie]';
 
-exports.describe = 'Search a file within a repository';
+exports.describe = 'set the config used by the tool - see the the package guide https://www.npmjs.com/package/tsundoku for how to find these values';
 
 exports.builder = yargs => {
     return yargs
@@ -32,7 +32,7 @@ exports.handler = (argv = {}) => {
 
     // add config vars to config file
     fs.writeFileSync(`${__dirname}/../../config.js`, `module.exports = ${JSON.stringify(configObj)}`, err => {
-        if (err) console.error(`error writing config file: ${error}`);
+        if (err) console.error(`error writing config file: ${err}`);
         else {
             console.log('updated config with your options');
         }

@@ -13,7 +13,7 @@ Table of Contents
  - [Usage](#usage)
  - [Troubleshooting](#Troubleshooting)
  - [Development](#Development)
- - [Things still to do](#things-still-todo)
+ - [Things still to do](#things-still-to-do)
  - [A note on the name](#a-note-on-the-name)
 
 Why does this exist
@@ -79,18 +79,14 @@ There are a set of test values that you can play around with in `./server/test`:
 Things still to do
 ---------------------
 
- - Error handling
- - Help pages
+ - Better error handling
  - Tests
- - Linting
- - Update README to elaborate on how to get Good Reads API key, Good Reads ID, and cookie from Amazon
  - Contribution guidelines
  - Output to google doc
- - Refactor to work more like cli tool and less like an app
  - Allow user to pass limit of how many books to scrape
  - Update README with shields?
  
 A note on the name
 ---------------------
 
-Tsundoku is a [Japaenese word](https://theculturetrip.com/asia/japan/articles/theres-a-special-japanese-word-for-people-addicted-to-buying-books/), which describes the habit of accumulating more books than you can actually get around to reading.
+Tsundoku is a [Japanese word](https://theculturetrip.com/asia/japan/articles/theres-a-special-japanese-word-for-people-addicted-to-buying-books/), which describes the habit of accumulating more books than you can actually get around to reading.

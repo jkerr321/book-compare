@@ -61,7 +61,9 @@
   },
   "deprecated": false,
   "description": "Tsundoku ========== A tool that outputs the books in your Goodreads `To Read` list in a csv file, along with their Amazon prices for different formats.",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^6.4.0"
+  },
   "homepage": "https://github.com/jkerr321/tsundoku#readme",
   "license": "MIT",
   "name": "tsundoku",

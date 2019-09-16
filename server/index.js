@@ -1,4 +1,3 @@
-const fs = require('fs');
 const scrapePrices = require('./lib/page-scraper');
 const getGoodReadBooks = require('./lib/good-reads-api');
 const { getCsvName, exportToCsv, deleteOldCsv } = require('./lib/csv-helpers');
