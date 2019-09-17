@@ -2,8 +2,8 @@ const scrapePrices = require('./lib/page-scraper');
 const getGoodReadBooks = require('./lib/good-reads-api');
 const { getCsvName, exportToCsv, deleteOldCsv } = require('./lib/csv-helpers');
 // test data sets
-const goodReadsTestResponse = require('./test/fixtures/good-reads-api-output');
-const testBookDetailsWithPrices = require('./test/fixtures/book-objects-for-export');
+const goodReadsTestResponse = require('./test/fixtures/good-reads-api-output'); // eslint-disable-line
+const testBookDetailsWithPrices = require('./test/fixtures/book-objects-for-export'); // eslint-disable-line 
 
 const isScrapeWithinPreviousDay = (timestampNow, csvName) => {
 	if (!csvName) {
