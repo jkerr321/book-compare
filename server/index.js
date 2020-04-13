@@ -25,7 +25,7 @@ const isScrapeWithinPreviousDay = (timestampNow, csvName) => {
 
 const init = async () => {
 	const timestampNow = new Date().valueOf();
-	const existingCsv = getCsvName();
+	const existingCsv = await getCsvName();
 
 	try {
 		const pricesScrapedInLast24Hours = isScrapeWithinPreviousDay(timestampNow, existingCsv);
@@ -58,9 +58,10 @@ const init = async () => {
 
 			exportToCsv(books, timestampNow);
 			if (existingCsv) deleteOldCsv(existingCsv);
+			const newCsv = await getCsvName()
 
-			console.log(`** Success! Prices have been exported to ${getCsvName()} in the Tsundoku project root :) **`)
-			console.log(`** The full file path for your book price csv file is: ${__dirname}/${getCsvName()} **`);
+			console.log(`** Success! Prices have been exported to ${newCsv} in the Tsundoku project root :) **`)
+			console.log(`** The full file path for your book price csv file is: ${__dirname}/${newCsv} **`);
 		}
 	} catch (err) {
 		console.log(err);
