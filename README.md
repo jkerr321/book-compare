@@ -1,9 +1,7 @@
 
 Tsundoku
 ==========
-A tool that outputs the books in your Goodreads `To Read` list in a csv file, along with their Amazon prices for different formats.
-
-**NOTE** This is a work in progress - it's not good at telling you when there are errors, and it doesn't have tests or linting(!) I'm working on it slowly in the background and will get to a stable version eventually, but am making it public now in the spirit of iterative release and making work visible early :)
+A tool that outputs the books in your Goodreads `To Read` list (to a limit of 400) in a csv file, along with their Amazon prices for different formats.
 
 Table of Contents
 -----------------

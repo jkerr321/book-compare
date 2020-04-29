@@ -16,13 +16,18 @@ const convertToJson = async result => {
 };
 
 const getBookInfo = async () => {
-	
 	try {
-		const apiResponse = await fetch(
-			`https://www.goodreads.com/review/list/${GOODREADS_USER}.xml?key=${GOODREADS_KEY}&v=2&shelf=to-read&per_page=200&page=1`
-		);
-		const json = await convertToJson(apiResponse);
-		const booksParent = json.GoodreadsResponse.reviews.review;
+		const apiResponse = async (n) => {
+			const response = await fetch(
+				`https://www.goodreads.com/review/list/${GOODREADS_USER}.xml?key=${GOODREADS_KEY}&v=2&shelf=to-read&per_page=200&page=${n}`
+			);
+			const json = await convertToJson(response);		
+			return json.GoodreadsResponse.reviews.review;
+		}
+
+		const pageOneResults = await apiResponse(1);
+		const pageTwoResults = await apiResponse(2);
+		const booksParent = pageOneResults.concat(pageTwoResults);
 
 		return booksParent.map(bookInfo => {
 			const book = bookInfo.book;
