@@ -16,13 +16,6 @@ const convertToJson = async result => {
 };
 
 const getBookInfo = async () => {
-	console.log('==================');
-	console.log('gothere3');
-	console.log('==================');
-	console.log('==================');
-	console.log('GOODREADS_KEY', GOODREADS_KEY);
-	console.log('==================');
-	
 	try {
 		const apiResponse = await fetch(
 			`https://www.goodreads.com/review/list/${GOODREADS_USER}.xml?key=${GOODREADS_KEY}&v=2&shelf=to-read&per_page=200&page=1`

@@ -5,11 +5,11 @@ const { COOKIE } = require('../../config');
 
 const getData = async (aisn) => {
 	try {
-		const url = `https://www.amazon.co.uk/gp/product/${aisn}`;
+		const url = `https://www.amazon.co.uk/dp/product/${aisn}`;
 		const headers = {
 			authority: 'www.amazon.co.uk',
 			method: 'GET',
-			path: `/gp/product/${aisn}`,
+			path: `/dp/product/${aisn}`,
 			scheme: 'https',
 			accept:
 				'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -42,7 +42,7 @@ const getData = async (aisn) => {
 	}
 };
 
-const formatData = async dataArray => {
+const formatData = async dataArray => {	
 	return dataArray.reduce((pricesObject, el) => {
 		//remove whitespace
 		const cleanString = el.replace(/\s+/g, ' ').trim();
@@ -105,23 +105,30 @@ const pageScraper = async (bookInfoArray) => {
 	return resolvedBookPrices.filter(Boolean);
 };
 
+const getIsbn = (isbn) => {
+	isbn.toString();
+	if (isbn && isbn.length < 10) {
+		return '0'.concat(isbn);
+	} else {
+		return isbn;
+	}
+}
+
 async function pageScrape(bookInfo) {
 	try {
-		const isbn = bookInfo.isbn ? bookInfo.isbn : bookInfo.isbn13;
-
+		const isbn = getIsbn(bookInfo.isbn);
 		if (isbn) {
 			// get Amazon Standard Identification Number - the book’s ISBN in its older, 10-digit version
 			const aisn = isbn.substring(isbn.length - 10);
 			const scrapedDataArray = await getData(aisn);
 			const amazonPrices = await formatData(scrapedDataArray);
 			const validatedPrices = validatePrices(amazonPrices);
-
 			console.info(`scraped and formatted prices for ${bookInfo.title}`);
 
 			return {
 				title: bookInfo.title,
 				prices: validatedPrices,
-				amazon_link: `https://www.amazon.co.uk/gp/product/${aisn}`
+				amazon_link: `https://www.amazon.co.uk/dp/product/${aisn}`
 			}
 		} else {
 			console.info(`no isbn for ${bookInfo.title}`);

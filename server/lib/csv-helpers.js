@@ -29,16 +29,14 @@ const deleteOldCsv = (csvName) => {
 
 const exportToCsv = (booksArray, timestamp) => {
     const filename = `${__dirname}/../../${timestamp}.output.csv`;    
-    const output = [['Title', 'Author', 'Goodreads Rating', 'Kindle Price', 'Hardcover Price New', 'Hardcover Price Used', 'Paperback Price New', 'Paperback Price New', 'link']]; // holds all rows of data
+    const output = [['Title', 'Author', 'Kindle Price', 'Hardcover Price New', 'Paperback Price New', 'Paperback Price Used', 'link']]; // holds all rows of data
 
     booksArray.forEach((book) => {
         const row = []; // a new array for each row of data
         row.push(`"${book.title}"`);
         row.push(`"${book.author}"`);
-        row.push(`"${book.average_rating}"`);
         row.push(`"${book.prices.kindle.amazon}"`);
         row.push(`"${book.prices.hardcover.amazon}"`);
-        row.push(`"${book.prices.hardcover.used_from}"`);
         row.push(`"${book.prices.paperback.amazon}"`);
         row.push(`"${book.prices.paperback.used_from}"`);
         row.push(`"${book.amazon_link}"`);

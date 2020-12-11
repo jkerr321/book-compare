@@ -1,4 +1,4 @@
-const { init } = require('../index');
+const { init } = require('../indexNew');
 
 exports.command = 'run';
 

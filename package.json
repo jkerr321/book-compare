@@ -54,6 +54,7 @@
   "dependencies": {
     "async-sema": "^3.0.0",
     "cheerio": "^1.0.0-rc.2",
+    "neat-csv": "^6.0.0",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.5",
     "xml-js": "^1.6.8",
